@@ -2,15 +2,10 @@ package edu.unlam.paradigmas.tp.main;
 
 import java.util.Scanner;
 
+import edu.unlam.paradigmas.tp.entidades.Archivo;
 import edu.unlam.paradigmas.tp.entidades.Criptomonedas;
 import edu.unlam.paradigmas.tp.entidades.Usuario;
 import edu.unlam.paradigmas.tp.entidades.Usuarios;
-
-//C:\\Users\\Santiago\\eclipse-workspace\\trabajo-practico\\res\\csv\\criptomonedas.csv
-//C:\\Users\\Santiago\\eclipse-workspace\\trabajo-practico\\res\\csv\\usuarios.csv
-//C:\\Users\\Santiago\\eclipse-workspace\\trabajo-practico\\res\\csv\\mercados.csv
-
-
 
 public class App {
 	public static void main(String[] args) {
@@ -22,8 +17,9 @@ public class App {
 		int opcion = 0;
 			
 		//SE DESCARGAN LOS ARCHIVOS CSV
-		c1.descargaReg("C:\\Users\\Santiago\\eclipse-workspace\\trabajo-practico\\res\\csv\\criptomonedas.csv");
-		u1.descargaReg("C:\\Users\\Santiago\\eclipse-workspace\\trabajo-practico\\res\\csv\\usuarios.csv");
+		c1.descargaRegCripto(Archivo.rutaCriptomonedas);
+		c1.descargaRegMercados(Archivo.rutaMercados);
+		u1.descargaReg(Archivo.rutaUsuarios);
 		
 		System.out.println("Ingresar nombre de usuario:");
 		
@@ -46,6 +42,10 @@ public class App {
 		
 		teclado.close();
 		
+		//Al finalizar el programa se deben actualizar los archivos
+		c1.updateRegCripto(Archivo.rutaCriptomonedas);
+		c1.updateRegMercados(Archivo.rutaMercados);
+		//u1.updateRegUsuarios(Archivo.rutaUsuarios);
 		
 		System.out.println("---------------------------------------------------");
 		c1.muestraReg();
