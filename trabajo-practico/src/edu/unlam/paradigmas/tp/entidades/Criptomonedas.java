@@ -61,7 +61,7 @@ public class Criptomonedas {
 			Criptomoneda aux = this.regCriptomonedas.get(i);
 			
 			regAux[i] = aux.getSimbolo()+", "+aux.getCapacidad()+", "+aux.getVolumen()+", "+aux.getVariacion();
-			System.out.println(regAux[i]);
+			//System.out.println(regAux[i]);
 		}
 		
 		FileManager.updateArchivo(ruta, regAux);
@@ -108,24 +108,9 @@ public class Criptomonedas {
 				aux.setNombre(nuevoParametro);
 			else
 				aux.setSimbolo(simbolo.toUpperCase());
-			
-			
 		}
 	}
-	
-	public void consultarCriptomoneda(String simbolo) {
-		Criptomoneda aux = new Criptomoneda("",simbolo);
-		int i;
 		
-		if((i = this.regCriptomonedas.indexOf(aux)) != -1) {
-			aux = this.regCriptomonedas.get(i);
-			System.out.println("Nombre: "+aux.getNombre()+"   Simbolo: "+aux.getSimbolo()+"   Precio en dolares:   "+aux.getPrecio());
-			System.out.println("Datos del mercado:");
-			System.out.println("Capacidad  volumen en las ultimas 24 horas  Variacion en los ultimos 7 dias");
-			System.out.println("  "+aux.getCapacidad()+"                  "+aux.getVolumen()+"%                             "+aux.getVariacion()+"%");
-		}
-	}
-	
 	public Criptomoneda getCriptomoneda(String simbolo) {
 		Criptomoneda cripto = new Criptomoneda("", simbolo);
 		int i;
@@ -138,13 +123,40 @@ public class Criptomonedas {
 		return cripto;
 	}
 	
+	public Criptomoneda recomendarCriptomoneda() {
+		Criptomoneda maxValor = this.criptoMayorValor(), maxPorcentaje = null;
+		double porcentaje = -1;
+		
+		for(Criptomoneda aux : this.regCriptomonedas) {
+			double auxPercent = ((maxValor.getCapacidad()/aux.getPrecio())*100);
+			if(porcentaje == -1 || porcentaje < auxPercent) {
+				maxPorcentaje = aux;
+				porcentaje = auxPercent;
+			}
+		}
+		
+		return maxPorcentaje;
+	}
+	
+	
+	private Criptomoneda criptoMayorValor() {
+		Criptomoneda max = null;
+		for(Criptomoneda aux : this.regCriptomonedas) {
+			if(max == null || max.getPrecio() < aux.getPrecio())
+				max = aux;
+			
+			
+			
+		}
+		
+		return max;
+	}
+	
+	
 	public void muestraReg() {
 		for(Criptomoneda cp : this.regCriptomonedas) {
 			System.out.println(cp.toString());
 		}
 	}
-	
-	
-	
 	
 }

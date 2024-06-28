@@ -94,7 +94,24 @@ public class Criptomoneda {
 	public void setVariacion(double variacion) {
 		this.variacion = variacion;
 	}
-
+	
+	public void esComprada(double totalComprado) {
+		this.capacidad -= totalComprado;
+		this.variacion *= 1.05;
+		this.volumen *= 1.05;
+		if(totalComprado > 1000)
+			this.precio *= 1.1;
+	}
+	
+	public void esVendida(double totalVendido) {
+		this.capacidad += totalVendido;
+		this.variacion *= 0.93;
+		this.volumen *= 0.93;
+		if(totalVendido > 1000)
+			this.precio *= 0.9;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return nombre + ", " + simbolo + ", " + precio;

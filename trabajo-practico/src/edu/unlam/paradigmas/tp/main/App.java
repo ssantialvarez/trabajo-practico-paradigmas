@@ -15,11 +15,7 @@ public class App {
 		Scanner teclado = new Scanner(System.in);
 		int opcion = 0;
 			
-		//SE DESCARGAN LOS ARCHIVOS CSV
-		listaCripto.descargaRegCripto(FileManager.rutaCriptomonedas);
-		listaCripto.descargaRegMercados(FileManager.rutaMercados);
-		listaUsuarios.descargaReg(FileManager.rutaUsuarios);
-		
+		App.descargaArchivos(listaUsuarios, listaCripto);
 		
 		opcion = App.menuInicio(teclado);
 		if(opcion == 1)
@@ -57,8 +53,21 @@ public class App {
 		System.out.println("---------------------------------------------------");
 		listaUsuarios.muestraReg();
 		
+		
 	}
 	
+	public static void descargaArchivos(Usuarios listaUsuarios, Criptomonedas listaCripto) {
+		//SE DESCARGAN LOS ARCHIVOS CSV
+		listaCripto.descargaRegCripto(FileManager.rutaCriptomonedas);
+		listaCripto.descargaRegMercados(FileManager.rutaMercados);
+		listaUsuarios.descargaReg(FileManager.rutaUsuarios);
+		
+		for(Usuario user : listaUsuarios.getRegUsuarios()) {
+			user.descargaHistorico(FileManager.rutaHistoricos.concat(user.getNombre().concat(".csv")));
+		}
+		
+		
+	}
 	
 	public static Usuario ingresaUsuario(Usuario posibleUsuario, Usuarios listaUsuarios, Scanner teclado) {
 		String username;
@@ -94,7 +103,7 @@ public class App {
 			nombreBanco = teclado.nextLine();
 			System.out.println("Ingrese saldo actual de su cuenta bancaria:");
 			saldo = teclado.nextDouble();
-			nombreBanco = teclado.nextLine();
+			teclado.nextLine();
 			
 			nuevoUsuario = listaUsuarios.creaUsuarioTrader(nombre, numCuenta, nombreBanco, saldo);
 			if(nuevoUsuario == null)

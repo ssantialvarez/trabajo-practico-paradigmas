@@ -12,7 +12,8 @@ import java.io.OutputStreamWriter;
 
 public class FileManager {
 	
-	
+	public static final String rutaHistoricos = "C:\\Users\\Santiago\\eclipse-workspace\\trabajo-practico\\res\\csv\\";
+	//La idea de esta ruta es que se le agregue el nombre de cada trader
 	public static final String rutaUsuarios = "C:\\Users\\Santiago\\eclipse-workspace\\trabajo-practico\\res\\csv\\usuarios.csv";
 	public static final String rutaMercados = "C:\\Users\\Santiago\\eclipse-workspace\\trabajo-practico\\res\\csv\\mercados.csv";
 	public static final String rutaCriptomonedas = "C:\\Users\\Santiago\\eclipse-workspace\\trabajo-practico\\res\\csv\\criptomonedas.csv";
@@ -20,21 +21,24 @@ public class FileManager {
 	
 	public static String[] abreArchivo(String ruta) {
 		String[] lineas = new String[contarLineas(ruta)];
-		try  {  
-			File file=new File(ruta);   
-			BufferedReader br=new BufferedReader(new FileReader(file));
-			
-			String linea;
-			int i = 0;
-			
-			while((linea = br.readLine()) != null)  {  
-				lineas[i++] = linea;
+		if(lineas.length > 0) {
+			try  {  
+				File file=new File(ruta);   
+				BufferedReader br=new BufferedReader(new FileReader(file));
+				
+				String linea;
+				int i = 0;
+				
+				while((linea = br.readLine()) != null)  {  
+					lineas[i++] = linea;
+				}
+				
+				br.close();
+			}  catch(Exception e)  {  
+				e.printStackTrace();  
 			}
-			
-			br.close();
-		}  catch(Exception e)  {  
-			e.printStackTrace();  
 		}
+		
 		
 		return lineas;
 	}
@@ -45,9 +49,7 @@ public class FileManager {
 			OutputStream os;
 	        OutputStreamWriter osw;
 	        BufferedWriter bw = null;
-			
-			
-			
+		
 			file.delete();
 			file.createNewFile();
 			
@@ -55,13 +57,11 @@ public class FileManager {
             osw = new OutputStreamWriter(os, "UTF8");
             bw = new BufferedWriter(osw);
 			
-			
             for(int i = 0; i < lineas.length; i++) {
             	bw.write(lineas[i]);
             	bw.newLine();
             }
             
-			
 			bw.close();
 		}  catch(IOException e)  {  
 			e.printStackTrace();  
@@ -71,16 +71,16 @@ public class FileManager {
 	public static int contarLineas(String ruta) {
 		int i = 0;
 		try  {  
-			File file=new File(ruta);   
-			BufferedReader br=new BufferedReader(new FileReader(file));
-			
-			
-			while(br.readLine() != null)  {  
-				i++;
+			File file=new File(ruta); 
+			if(file.exists()) {
+				BufferedReader br=new BufferedReader(new FileReader(file));
+				
+				while(br.readLine() != null)  {  
+					i++;
+				}
+				
+				br.close();
 			}
-			
-			br.close();
-			
 		}  catch(Exception e)  {  
 			e.printStackTrace();  
 		}

@@ -17,7 +17,7 @@ public class Usuarios {
 			if(aux[1].compareTo("administrador") == 0) {
 				this.regUsuarios.add(new Administrador(aux[0]));
 			}else {
-				this.regUsuarios.add(new Trader(aux[0],aux[1],aux[2],aux[3]));
+				this.regUsuarios.add(new Trader(aux[0],aux[1],aux[2].strip(),aux[3]));
 			}
 		}
 		
@@ -36,7 +36,7 @@ public class Usuarios {
 	}
 	
 	public Usuario creaUsuarioTrader(String username, int numCuenta, String nombreBanco, double saldo) { 
-		Usuario user = new Trader(username,numCuenta,nombreBanco,saldo);
+		Trader user = new Trader(username,numCuenta,nombreBanco,saldo);
 		if(!this.regUsuarios.contains(user)) {
 			this.regUsuarios.add(user);
 		} else {
@@ -53,6 +53,10 @@ public class Usuarios {
 			user = null;
 		}
 		return user;
+	}
+	
+	public List<Usuario> getRegUsuarios() {
+		return this.regUsuarios;
 	}
 	
 	public void muestraReg() {

@@ -26,17 +26,30 @@ public class Usuario {
 	
 	public void consultarCriptomoneda(Criptomonedas regCripto, Scanner teclado) {
 		String simbolo;
+		Criptomoneda aux;
 		
 		System.out.println("Ingresar simbolo de la criptomoneda a consultar:");
 		simbolo = teclado.nextLine();
 		
-		regCripto.consultarCriptomoneda(simbolo);
+		aux = regCripto.getCriptomoneda(simbolo);
+		if(aux == null)
+			return ;
+		
+		System.out.println("Nombre: "+aux.getNombre()+"   Simbolo: "+aux.getSimbolo()+"   Precio en dolares:   "+aux.getPrecio());
+		System.out.println("Datos del mercado:");
+		System.out.println("Capacidad  volumen en las ultimas 24 horas  Variacion en los ultimos 7 dias");
+		System.out.println("  "+aux.getCapacidad()+"                  "+aux.getVolumen()+"%                             "+aux.getVariacion()+"%");
 	}
 	
 	public void verEstadoActualMercado(Criptomonedas regCripto) {
 		System.out.println("El estado actual del mercado es muy bueno");
 		//REVISAR
 	}
+	
+	public void descargaHistorico(String ruta) {
+		
+	}
+	
 	
 	@Override
 	public int hashCode() {
