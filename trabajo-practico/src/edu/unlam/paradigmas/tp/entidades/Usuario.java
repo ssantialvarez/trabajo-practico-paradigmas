@@ -24,6 +24,15 @@ public class Usuario {
 		return 0;
 	}
 	
+	public void consultarCriptomoneda(Criptomonedas regCripto, Scanner teclado) {
+		String simbolo;
+		
+		System.out.println("Ingresar simbolo de la criptomoneda a consultar:");
+		simbolo = teclado.nextLine();
+		
+		regCripto.consultarCriptomoneda(simbolo);
+	}
+	
 	public void verEstadoActualMercado(Criptomonedas regCripto) {
 		System.out.println("El estado actual del mercado es muy bueno");
 		//REVISAR

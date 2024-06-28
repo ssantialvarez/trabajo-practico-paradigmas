@@ -7,7 +7,7 @@ public class Usuarios {
 	protected List<Usuario> regUsuarios = new LinkedList<>();
 	
 	public void descargaReg(String ruta) {
-		String[] regAux = Archivo.abreArchivo(ruta);
+		String[] regAux = FileManager.abreArchivo(ruta);
 		String[] aux;
 		
 		for(int i = 0; i < regAux.length; i++) {
@@ -32,6 +32,26 @@ public class Usuarios {
 			//CON EL INDICE OBTENEMOS EL OBJ USUARIO QUE BUSCAMOS
 		}
 		
+		return user;
+	}
+	
+	public Usuario creaUsuarioTrader(String username, int numCuenta, String nombreBanco, double saldo) { 
+		Usuario user = new Trader(username,numCuenta,nombreBanco,saldo);
+		if(!this.regUsuarios.contains(user)) {
+			this.regUsuarios.add(user);
+		} else {
+			user = null;
+		}
+		return user;
+	}
+	
+	public Usuario creaUsuarioAdministrador(String username) { 
+		Usuario user = new Administrador(username);
+		if(!this.regUsuarios.contains(user)) {
+			this.regUsuarios.add(user);
+		} else {
+			user = null;
+		}
 		return user;
 	}
 	

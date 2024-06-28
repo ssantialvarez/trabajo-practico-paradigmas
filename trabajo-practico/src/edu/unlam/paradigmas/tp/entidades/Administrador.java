@@ -95,15 +95,6 @@ public class Administrador extends Usuario{
 		regCripto.eliminarCriptomoneda(simbolo);	
 	}
 	
-	public void consultarCriptomoneda(Criptomonedas regCripto, Scanner teclado) {
-		String simbolo;
-		
-		System.out.println("Ingresar simbolo de la criptomoneda a consultar:");
-		simbolo = teclado.nextLine();
-		
-		regCripto.consultarCriptomoneda(simbolo);
-	}
-	
 	
 	@Override
 	public void menu() {

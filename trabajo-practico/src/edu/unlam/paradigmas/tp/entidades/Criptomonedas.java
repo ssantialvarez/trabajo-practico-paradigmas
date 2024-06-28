@@ -4,10 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Criptomonedas {
-	protected List<Criptomoneda> regCriptomonedas = new LinkedList<>();
+	private List<Criptomoneda> regCriptomonedas = new LinkedList<>();
 	
 	public void descargaRegCripto(String ruta) {
-		String[] regAux = Archivo.abreArchivo(ruta);
+		String[] regAux = FileManager.abreArchivo(ruta);
 		String[] aux;
 		
 		for(int i = 0; i < regAux.length; i++) {
@@ -17,7 +17,7 @@ public class Criptomonedas {
 	}
 	
 	public void descargaRegMercados(String ruta) {
-		String[] regAux = Archivo.abreArchivo(ruta);
+		String[] regAux = FileManager.abreArchivo(ruta);
 		String[] aux;
 		
 		for(int i = 0; i < regAux.length; i++) {
@@ -49,7 +49,7 @@ public class Criptomonedas {
 			regAux[i] = this.regCriptomonedas.get(i).toString();
 		}
 		
-		Archivo.updateArchivo(ruta, regAux);
+		FileManager.updateArchivo(ruta, regAux);
 	}
 		
 	public void updateRegMercados(String ruta) {
@@ -64,7 +64,7 @@ public class Criptomonedas {
 			System.out.println(regAux[i]);
 		}
 		
-		Archivo.updateArchivo(ruta, regAux);
+		FileManager.updateArchivo(ruta, regAux);
 	}
 
 	public int crearCriptomoneda(String nombre, String simbolo, double precio) {
@@ -124,6 +124,18 @@ public class Criptomonedas {
 			System.out.println("Capacidad  volumen en las ultimas 24 horas  Variacion en los ultimos 7 dias");
 			System.out.println("  "+aux.getCapacidad()+"                  "+aux.getVolumen()+"%                             "+aux.getVariacion()+"%");
 		}
+	}
+	
+	public Criptomoneda getCriptomoneda(String simbolo) {
+		Criptomoneda cripto = new Criptomoneda("", simbolo);
+		int i;
+		
+		if((i = this.regCriptomonedas.indexOf(cripto)) != -1)
+			cripto = this.regCriptomonedas.get(i);
+		else
+			cripto = null;
+		
+		return cripto;
 	}
 	
 	public void muestraReg() {
