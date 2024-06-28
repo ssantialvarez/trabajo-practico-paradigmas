@@ -9,4 +9,9 @@ Hasta el momento estan hechas las funciones propias del administrador, excepto l
 
 commit 17:02 27/06/2024
 
-El meteodo ver estado actual del mercado sigue sin funcionar. Agregue los metodos para descargar mercados.csv y sus atributos en la clase Criptomoneda etc. Los archivos ahora se actualizan al cerrar el programa. aun falta la posibilidad de crear un usuario.
+El metodo ver estado actual del mercado sigue sin funcionar. Agregue los metodos para descargar mercados.csv y sus atributos en la clase Criptomoneda etc. Los archivos ahora se actualizan al cerrar el programa. aun falta la posibilidad de crear un usuario.
+
+
+commit 13:01 28/06/2024
+
+agregando funcionalidades del trader. dejo enlace donde arme un diagrama simple: https://docs.google.com/drawings/d/1FPJtQxsSiezR4AprOp2ZVmCux7HCQ19hA0MauHv8yqI/edit?usp=sharing
