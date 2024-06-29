@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Usuario {
 	protected String nombre;
-	
+	protected boolean modificacion = false;
 	
 	public Usuario(String nombre) {
 		this.nombre = nombre;

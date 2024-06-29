@@ -9,7 +9,7 @@ public class Administrador extends Usuario{
 	}
 	
 	
-	public void crearCriptomoneda(Criptomonedas regCripto, Scanner teclado) {
+	public boolean crearCriptomoneda(Criptomonedas regCripto, Scanner teclado) {
 		String nombre, simbolo, opcion;
 		double precio;
 		int band = -1;
@@ -27,6 +27,11 @@ public class Administrador extends Usuario{
 			
 			band = regCripto.crearCriptomoneda(nombre, simbolo, precio);
 			
+			if(band == 0) {
+				return true;
+			}
+			
+			
 			if(band == -1) {
 				System.out.println("El nombre y/o el simbolo ya existen, por lo que no se pudo agregar la criptomoneda.");
 				System.out.println("¿Desea volver a crear una Criptomoneda?Y/N");
@@ -36,12 +41,14 @@ public class Administrador extends Usuario{
 				// se mantenga en -1 y se quedase dentro del bucle. Caso contrario toma el 0 y sale del while.
 			}
 		}	
+		
+		return false;
 		//Si la criptomoneda que se desea dar de alta existe en el archivo criptomonedas.csv, 
 		//se debe emitir un mensaje aclaratorio indicando que no se puede agregar y se debe consultar al usuario 
 		//si desea modificar algún parámetro de esta, en caso afirmativo el sistema lo redireccionará a dicha funcionalidad.
 	}
 	
-	public void modificarCriptomoneda(Criptomonedas regCripto, Scanner teclado) {
+	public boolean modificarCriptomoneda(Criptomonedas regCripto, Scanner teclado) {
 		String simbolo, opcion;
 		int band = 0;
 		
@@ -49,8 +56,12 @@ public class Administrador extends Usuario{
 		simbolo = teclado.nextLine();
 		
 		//ESTO NO ME GUSTA 
-		System.out.println("Parametro a modificar. Ingrese N para nombre, S para simbolo o P para el precio");
-		opcion = teclado.nextLine();
+		do {
+			System.out.println("Parametro a modificar. Ingrese N para nombre, S para simbolo o P para el precio");
+			opcion = teclado.nextLine();
+		}while(opcion != "P" || opcion != "N" || opcion != "S");
+
+		
 		if(opcion.toUpperCase().compareTo("P") == 0) {
 			double nuevoPrecio;
 			
@@ -59,7 +70,7 @@ public class Administrador extends Usuario{
 			teclado.nextLine();//esto al parecer limpia el buffer
 			
 			band++;
-			regCripto.modificarCriptomoneda(simbolo,nuevoPrecio);
+			return regCripto.modificarCriptomoneda(simbolo,nuevoPrecio);
 		}
 		if(band != 1 && opcion.toUpperCase().compareTo("N") == 0) {
 			String nuevoNombre;
@@ -68,7 +79,7 @@ public class Administrador extends Usuario{
 			nuevoNombre = teclado.nextLine();
 			
 			band++;
-			regCripto.modificarCriptomoneda(simbolo, nuevoNombre, 0);//OP = 0 representa que se modifica el nombre
+			return regCripto.modificarCriptomoneda(simbolo, nuevoNombre, 0);//OP = 0 representa que se modifica el nombre
 		}
 		if(band != 1 && opcion.toUpperCase().compareTo("S") == 0) {
 			String nuevoSimbolo;
@@ -77,13 +88,13 @@ public class Administrador extends Usuario{
 			nuevoSimbolo = teclado.nextLine();
 			
 			band++;
-			regCripto.modificarCriptomoneda(simbolo, nuevoSimbolo, 1);//OP = 1 representa que se modifica el simbolo
+			return regCripto.modificarCriptomoneda(simbolo, nuevoSimbolo, 1);//OP = 1 representa que se modifica el simbolo
 		}
 		
 		//nota: por ahora la logica es que si el simbolo NO se encuentra no se modifica NADA y no se le avisa al usuario.
 		//no me parece mal simplemente porque no quiero pensar en mas logica para pedir que se reingrese el simbolo
 		//si quieren agreganlo
-			
+		return false;
 	}
 	
 	public void eliminarCriptomoneda(Criptomonedas regCripto, Scanner teclado) {
@@ -116,7 +127,7 @@ public class Administrador extends Usuario{
 		switch(opcion) {
 			case 1:
 				System.out.println("Eligio crear una criptomoneda.");
-				this.crearCriptomoneda(regCripto, teclado);
+				this.modificacion = this.crearCriptomoneda(regCripto, teclado);
 				break;
 			case 2:
 				System.out.println("Eligio modificar una criptomoneda.");

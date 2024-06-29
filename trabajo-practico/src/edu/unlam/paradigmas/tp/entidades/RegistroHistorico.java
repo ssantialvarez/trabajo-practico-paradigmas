@@ -2,7 +2,7 @@ package edu.unlam.paradigmas.tp.entidades;
 
 import java.util.Objects;
 
-public class RegistroHistorico {
+public class RegistroHistorico implements Comparable<RegistroHistorico>{
 	protected String simbolo;
 	protected double cantidad;
 	
@@ -52,4 +52,17 @@ public class RegistroHistorico {
 		RegistroHistorico other = (RegistroHistorico) obj;
 		return Objects.equals(simbolo, other.simbolo);
 	}
+	
+	@Override
+	public int compareTo(RegistroHistorico o) {
+		return Double.compare(o.cantidad, cantidad);
+	}
+
+
+	/*
+	@Override
+	public int compareTo(RegistroHistorico o) {
+		return this.simbolo.compareTo(o.simbolo);
+	}
+	*/
 }

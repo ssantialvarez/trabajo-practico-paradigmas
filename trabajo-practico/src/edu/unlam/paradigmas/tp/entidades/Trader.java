@@ -1,12 +1,13 @@
 package edu.unlam.paradigmas.tp.entidades;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Trader extends Usuario{
 	protected CuentaBancaria cuentaTrader;
-	protected LinkedList<RegistroHistorico> regHist;
+	protected LinkedList<RegistroHistorico> regHist = new LinkedList<>();
 	
 	public Trader(String nombre, int numCuenta, String nombreBanco, double saldo) {
 		super(nombre);
@@ -31,8 +32,6 @@ public class Trader extends Usuario{
 		
 	}
 	
-	
-
 	public void compraCriptomoneda(Criptomonedas regCripto, Scanner teclado) {
 		Criptomoneda cripto = null;
 		String simbolo;
@@ -128,6 +127,15 @@ public class Trader extends Usuario{
 		
 	}
 	
+	public void visualizarHistorico() {
+		
+		System.out.println("---------");
+		Collections.sort(this.regHist);
+		for(RegistroHistorico aux: this.regHist) {
+			System.out.println(aux.toString());
+		}
+	}
+	
 	@Override
 	public void menu() {
 		System.out.println("Menú de opciones ");
@@ -141,7 +149,7 @@ public class Trader extends Usuario{
 		System.out.println(" 6) Visualizar archivo de transacciones (histórico).");
 		System.out.println(" 7) Salir");
 		System.out.println();
-		System.out.println("Ingrese su opción (1 - 6): _ ");
+		System.out.println("Ingrese su opción (1 - 7): _ ");
 	}
 	
 	@Override
@@ -169,7 +177,7 @@ public class Trader extends Usuario{
 				break;
 			case 6:
 				System.out.println("Eligio visualizar archivo de transacciones (histórico).");
-				
+				this.visualizarHistorico();
 				break;
 			case 7:
 				System.out.println("Eligio salir.");

@@ -42,9 +42,10 @@ public class App {
 		
 		
 		//Al finalizar el programa se deben actualizar los archivos
-		//listaCripto.updateRegCripto(Archivo.rutaCriptomonedas);
-		//listaCripto.updateRegMercados(Archivo.rutaMercados);
-		//listaUsuarios.updateRegUsuarios(Archivo.rutaUsuarios);
+		listaCripto.updateRegCripto(FileManager.rutaCriptomonedas);
+		listaCripto.updateRegMercados(FileManager.rutaMercados);
+		//falta actualizar
+		listaUsuarios.updateRegUsuarios(FileManager.rutaUsuarios);
 		
 		//ESTO ES UNICAMENTE DE CONTROL
 		//SE DEBERIA SACAR

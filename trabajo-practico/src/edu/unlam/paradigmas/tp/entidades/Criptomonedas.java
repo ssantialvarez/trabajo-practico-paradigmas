@@ -86,17 +86,21 @@ public class Criptomonedas {
 	}
 	
 	//tambien se modifica buscando el Simbolo
-	public void modificarCriptomoneda(String simbolo, double precio) {
+	public boolean modificarCriptomoneda(String simbolo, double precio) {
 		Criptomoneda aux = new Criptomoneda("",simbolo);
 		int i;
+		boolean band = false;
 		
 		if((i = this.regCriptomonedas.indexOf(aux)) != -1) {
 			aux = this.regCriptomonedas.get(i);
 			aux.setPrecio(precio);
+			band = true;
 		}
+		
+		return band;
 	}
 	
-	public void modificarCriptomoneda(String simbolo, String nuevoParametro, int op) {
+	public boolean modificarCriptomoneda(String simbolo, String nuevoParametro, int op) {
 		Criptomoneda aux = new Criptomoneda("",simbolo);
 		int i;
 		
@@ -108,7 +112,10 @@ public class Criptomonedas {
 				aux.setNombre(nuevoParametro);
 			else
 				aux.setSimbolo(simbolo.toUpperCase());
+			return true;
 		}
+		
+		return false;
 	}
 		
 	public Criptomoneda getCriptomoneda(String simbolo) {

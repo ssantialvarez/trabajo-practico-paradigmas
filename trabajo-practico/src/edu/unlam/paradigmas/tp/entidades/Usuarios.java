@@ -6,6 +6,7 @@ import java.util.List;
 public class Usuarios {
 	protected List<Usuario> regUsuarios = new LinkedList<>();
 	
+	
 	public void descargaReg(String ruta) {
 		String[] regAux = FileManager.abreArchivo(ruta);
 		String[] aux;
@@ -20,6 +21,10 @@ public class Usuarios {
 				this.regUsuarios.add(new Trader(aux[0],aux[1],aux[2].strip(),aux[3]));
 			}
 		}
+		
+	}
+	
+	public void updateRegUsuarios(String ruta) {
 		
 	}
 	
