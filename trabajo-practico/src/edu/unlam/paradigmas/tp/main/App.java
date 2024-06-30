@@ -14,7 +14,7 @@ public class App {
 		Usuario usuarioActual = null;
 		Scanner teclado = new Scanner(System.in);
 		int opcion = 0;
-			
+			//test
 		App.descargaArchivos(listaUsuarios, listaCripto);
 		
 		opcion = App.menuInicio(teclado);
@@ -39,13 +39,8 @@ public class App {
 		
 		
 		
-		
-		
 		//Al finalizar el programa se deben actualizar los archivos
-		//listaCripto.updateRegCripto(FileManager.rutaCriptomonedas);
-		//listaCripto.updateRegMercados(FileManager.rutaMercados);
-		//falta actualizar
-		//listaUsuarios.updateRegUsuarios(FileManager.rutaUsuarios);
+		App.updateArchivos(listaUsuarios, listaCripto);
 		
 		//ESTO ES UNICAMENTE DE CONTROL
 		//SE DEBERIA SACAR
@@ -64,10 +59,21 @@ public class App {
 		listaUsuarios.descargaReg(FileManager.rutaUsuarios);
 		
 		for(Usuario user : listaUsuarios.getRegUsuarios()) {
-			user.descargaHistorico(FileManager.rutaHistoricos.concat(user.getNombre().concat(".csv")));
+			user.descargaHistorico(FileManager.rutaHistoricos.concat(user.getNombre().concat("_historico.csv")));
+			//System.out.println(FileManager.rutaHistoricos.concat(user.getNombre().concat("_historico.csv")));
 		}
+	}
+	
+	public static void updateArchivos(Usuarios listaUsuarios, Criptomonedas listaCripto) {
 		
-		
+		//listaCripto.updateRegCripto(FileManager.rutaCriptomonedas);
+		//listaCripto.updateRegMercados(FileManager.rutaMercados);
+		listaUsuarios.updateRegUsuarios(FileManager.rutaUsuarios);
+		for(Usuario user : listaUsuarios.getRegUsuarios()) {
+			String ruta = FileManager.rutaHistoricos.concat(user.getNombre().concat("_historico.csv"));
+			user.updateHistorico(ruta);
+			//System.out.println(FileManager.rutaHistoricos.concat(user.getNombre().concat("_historico.csv")));
+		}
 	}
 	
 	public static Usuario ingresaUsuario(Usuario posibleUsuario, Usuarios listaUsuarios, Scanner teclado) {

@@ -78,7 +78,7 @@ public class CuentaBancaria {
 		if (getClass() != obj.getClass())
 			return false;
 		CuentaBancaria other = (CuentaBancaria) obj;
-		return Objects.equals(nombreBanco.strip().toLowerCase(), other.nombreBanco.strip().toLowerCase()) && numCuenta == other.numCuenta;
+		return Objects.equals(nombreBanco.trim().toLowerCase(), other.nombreBanco.trim().toLowerCase()) && numCuenta == other.numCuenta;
 	}
 	
 	

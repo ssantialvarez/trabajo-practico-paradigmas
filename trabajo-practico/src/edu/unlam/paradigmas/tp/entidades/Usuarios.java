@@ -13,19 +13,26 @@ public class Usuarios {
 		
 		for(int i = 0; i < regAux.length; i++) {
 			aux = regAux[i].split(",");
-			aux[1] = aux[1].strip();
-			//SE HACE EL STRIP PARA ELIMINAR POSIBLES ESPACIOS AL INICIO DE LA CADENA
+			aux[1] = aux[1].trim();
+			//SE HACE EL trim PARA ELIMINAR POSIBLES ESPACIOS AL INICIO DE LA CADENA
 			if(aux[1].compareTo("administrador") == 0) {
 				this.regUsuarios.add(new Administrador(aux[0]));
 			}else {
-				this.regUsuarios.add(new Trader(aux[0],aux[1],aux[2].strip(),aux[3]));
+				this.regUsuarios.add(new Trader(aux[0],aux[1],aux[2].trim(),aux[3]));
 			}
 		}
 		
 	}
 	
 	public void updateRegUsuarios(String ruta) {
+		int largo = this.regUsuarios.size();
+		String[] regAux = new String[largo];
 		
+		for(int i = 0; i < largo; i++) {
+			regAux[i] = this.regUsuarios.get(i).toString();
+		}
+		
+		FileManager.updateArchivo(ruta, regAux);
 	}
 	
 	public Usuario ingresaUsuario(String username) {

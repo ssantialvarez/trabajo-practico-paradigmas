@@ -132,7 +132,7 @@ public class Criptomoneda {
 			return false;
 		Criptomoneda other = (Criptomoneda) obj;
 		return Objects.equals(nombre.toLowerCase(), other.nombre.toLowerCase()) 
-				|| Objects.equals(simbolo.toUpperCase().strip(), other.simbolo.toUpperCase().strip());
+				|| Objects.equals(simbolo.toUpperCase().trim(), other.simbolo.toUpperCase().trim());
 	}
 
 	

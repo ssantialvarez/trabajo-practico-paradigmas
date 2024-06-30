@@ -12,10 +12,10 @@ public class Criptomonedas {
 		
 		for(int i = 0; i < regAux.length; i++) {
 			aux = regAux[i].split(",");
-			this.regCriptomonedas.add(new Criptomoneda(aux[0],aux[1].strip(),aux[2]));	
+			this.regCriptomonedas.add(new Criptomoneda(aux[0],aux[1].trim(),aux[2]));	
 		}	
 	}
-	
+	 
 	public List<Criptomoneda> getRegCriptomonedas() {
 		return this.regCriptomonedas;
 	}
@@ -64,7 +64,14 @@ public class Criptomonedas {
 		for(int i = 0; i < largo; i++) {
 			Criptomoneda aux = this.regCriptomonedas.get(i);
 			
-			regAux[i] = aux.getSimbolo()+", "+aux.getCapacidad()+", "+aux.getVolumen()+", "+aux.getVariacion();
+			
+			regAux[i] = aux.getSimbolo()+", "+aux.getCapacidad()+", "+aux.getVolumen()+"%, ";
+			if(aux.getVariacion() > 0) {
+				regAux[i] = regAux[i].concat("+"+aux.getVariacion()+"%");
+			} else {
+				regAux[i] = regAux[i].concat(aux.getVariacion()+"%");
+			}
+			
 			//System.out.println(regAux[i]);
 		}
 		
