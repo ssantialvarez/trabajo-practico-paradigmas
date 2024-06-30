@@ -12,11 +12,21 @@ import java.io.OutputStreamWriter;
 
 public class FileManager {
 	
-	public static final String rutaHistoricos = "C:\\Users\\Santiago\\eclipse-workspace\\trabajo-practico\\res\\csv\\";
+	public static final String rutaHistoricos = "C:\\Users\\Santiago\\Documents\\Santi\\Materias 2024\\1er Cuatrimestre\\Paradigmas de Programación\\Trabajo Practico\\TP-Paradigmas1C2024-main\\trabajo-practico\\res\\csv\\";
 	//La idea de esta ruta es que se le agregue el nombre de cada trader
-	public static final String rutaUsuarios = "C:\\Users\\Santiago\\eclipse-workspace\\trabajo-practico\\res\\csv\\usuarios.csv";
-	public static final String rutaMercados = "C:\\Users\\Santiago\\eclipse-workspace\\trabajo-practico\\res\\csv\\mercados.csv";
-	public static final String rutaCriptomonedas = "C:\\Users\\Santiago\\eclipse-workspace\\trabajo-practico\\res\\csv\\criptomonedas.csv";
+	public static final String rutaUsuarios = "C:\\Users\\Santiago\\Documents\\Santi\\Materias 2024\\1er Cuatrimestre\\Paradigmas de Programación\\Trabajo Practico\\TP-Paradigmas1C2024-main\\trabajo-practico\\res\\csv\\usuarios.csv";
+	public static final String rutaMercados = "C:\\Users\\Santiago\\Documents\\Santi\\Materias 2024\\1er Cuatrimestre\\Paradigmas de Programación\\Trabajo Practico\\TP-Paradigmas1C2024-main\\trabajo-practico\\res\\csv\\mercados.csv";
+	public static final String rutaCriptomonedas ="C:\\Users\\Santiago\\Documents\\Santi\\Materias 2024\\1er Cuatrimestre\\Paradigmas de Programación\\Trabajo Practico\\TP-Paradigmas1C2024-main\\trabajo-practico\\res\\csv\\criptomonedas.csv";
+	
+	
+	public static void crearArchivo(String ruta) {
+		try  {  
+			File file=new File(ruta); 
+			file.createNewFile();
+		}  catch(Exception e)  {  
+			e.printStackTrace();  
+		}
+	}
 	
 	
 	public static String[] abreArchivo(String ruta) {
@@ -86,6 +96,16 @@ public class FileManager {
 		}
 		
 		return i;
+	}
+	
+	public static boolean existeArchivo(String ruta) {
+		try  {  
+			File file=new File(ruta); 
+			return file.exists();
+		}  catch(Exception e)  {  
+			e.printStackTrace(); 
+			return false;
+		}
 	}
 	
 	

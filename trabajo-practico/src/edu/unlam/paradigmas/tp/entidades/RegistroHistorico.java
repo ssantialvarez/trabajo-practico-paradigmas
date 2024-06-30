@@ -70,6 +70,14 @@ public class RegistroHistorico implements Comparable<RegistroHistorico>{
         }
     }
 
+	public static class CompararCantidadDescendente implements Comparator<RegistroHistorico> {
+
+        @Override
+        public int compare(RegistroHistorico reg1, RegistroHistorico reg2) {
+            return Double.compare(reg2.cantidad, reg1.cantidad);
+        }
+    }
+
 	@Override
 	public int compareTo(RegistroHistorico o) {
 	return this.simbolo.compareTo(o.simbolo);

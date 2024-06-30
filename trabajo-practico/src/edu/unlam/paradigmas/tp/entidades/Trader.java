@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Scanner;
 
+
+
 public class Trader extends Usuario{
 	protected CuentaBancaria cuentaTrader;
 	protected LinkedList<RegistroHistorico> regHist = new LinkedList<>();
@@ -30,6 +32,18 @@ public class Trader extends Usuario{
 			this.regHist.add(new RegistroHistorico(aux[0],aux[1]));
 		}
 		
+	}
+	
+	@Override
+	public void updateHistorico(String ruta) {
+		int largo = this.regHist.size();
+		String[] regAux = new String[largo];
+		
+		for(int i = 0; i < largo; i++) {
+			regAux[i] = this.regHist.get(i).toString();
+		}
+		
+		FileManager.updateArchivo(ruta, regAux);
 	}
 	
 	public void compraCriptomoneda(Criptomonedas regCripto, Scanner teclado) {
@@ -127,13 +141,39 @@ public class Trader extends Usuario{
 		
 	}
 	
-	public void visualizarHistorico() {
+	public void visualizarHistorico(Scanner teclado) {
 		
 		System.out.println("---------");
 		Collections.sort(this.regHist, new RegistroHistorico.CompararCantidad());
+
+		// System.out.println("Desea ver el registro de manera Ascendente(A) o Descendente(D)?");
+		
+		System.out.println("Elija el orden para visualizar el registro\n------------------\\n");
+		System.out.println(" 1) Simbolo Ascendente");
+		System.out.println(" 2) Cantidad Descendente\n");
+		System.out.println("Ingrese su opción (1 - 2): _ ");
+		
+		int orden = teclado.nextInt(); 
+
+		switch (orden) {
+			case 1:
+				Collections.sort(this.regHist, new RegistroHistorico.CompararPorSimbolo());
+				break;
+
+			case 2:
+				Collections.sort(this.regHist, new RegistroHistorico.CompararCantidadDescendente());
+				break;
+				
+			default:
+				System.out.println("Opcion invalida.");
+				return;
+		}
+
+				
 		for(RegistroHistorico aux: this.regHist) {
 			System.out.println(aux.toString());
 		}
+				
 	}
 	
 	@Override
@@ -177,7 +217,7 @@ public class Trader extends Usuario{
 				break;
 			case 6:
 				System.out.println("Eligio visualizar archivo de transacciones (histórico).");
-				this.visualizarHistorico();
+				this.visualizarHistorico(teclado);
 				break;
 			case 7:
 				System.out.println("Eligio salir.");
@@ -191,7 +231,7 @@ public class Trader extends Usuario{
 
 	@Override
 	public String toString() {
-		return "Trader [nombre=" + nombre + ", numCuenta="+this.cuentaTrader.getNumCuenta()+", nombreBanco="+ this.cuentaTrader.getNombreBanco()+"]";
+		return  this.nombre + ", "+this.cuentaTrader.getNumCuenta()+", "+ this.cuentaTrader.getNombreBanco()+", "+this.cuentaTrader.getSaldo();
 	}
 		
 	@Override

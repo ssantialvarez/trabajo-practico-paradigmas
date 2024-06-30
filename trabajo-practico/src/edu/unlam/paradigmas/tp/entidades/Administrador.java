@@ -59,7 +59,7 @@ public class Administrador extends Usuario{
 		do {
 			System.out.println("Parametro a modificar. Ingrese N para nombre, S para simbolo o P para el precio");
 			opcion = teclado.nextLine();
-		}while(opcion != "P" || opcion != "N" || opcion != "S");
+		}while(opcion.toUpperCase().equals("S") && opcion.toUpperCase().equals("N") && opcion.toUpperCase().equals("S"));
 
 		
 		if(opcion.toUpperCase().compareTo("P") == 0) {
@@ -127,7 +127,7 @@ public class Administrador extends Usuario{
 		switch(opcion) {
 			case 1:
 				System.out.println("Eligio crear una criptomoneda.");
-				this.modificacion = this.crearCriptomoneda(regCripto, teclado);
+				this.crearCriptomoneda(regCripto, teclado);
 				break;
 			case 2:
 				System.out.println("Eligio modificar una criptomoneda.");
@@ -153,6 +153,12 @@ public class Administrador extends Usuario{
 				System.out.println("Opcion incorrecta. Reingresar.");
 		}
 		return opcion;
+	}
+
+
+	@Override
+	public String toString() {
+		return this.nombre+", administrador";
 	}
 	
 }

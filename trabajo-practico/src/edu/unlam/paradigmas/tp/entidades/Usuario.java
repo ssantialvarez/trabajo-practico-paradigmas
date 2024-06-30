@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Usuario {
 	protected String nombre;
-	protected boolean modificacion = false;
 	
 	public Usuario(String nombre) {
 		this.nombre = nombre;
@@ -42,8 +41,15 @@ public class Usuario {
 	}
 	
 	public void verEstadoActualMercado(Criptomonedas regCripto) {
+		String linea;
 		for(Criptomoneda aux : regCripto.getRegCriptomonedas()) {
-			System.out.println("Simbolo: "+ aux.getSimbolo()+", Capacidad: " + aux.getCapacidad()+", Volumen 24hrs: "+ aux.getVolumen()+", Variacion 7 dias: "+ aux.getVariacion());
+			linea = aux.getSimbolo()+", Capacidad: " + aux.getCapacidad()+", Volumen 24hrs: "+ aux.getVolumen();
+			if(aux.getVariacion() > 0) {
+				linea = linea.concat("%, Variacion 7 dias: +"+ aux.getVariacion()+"%");
+			} else {
+				linea = linea.concat("%, Variacion 7 dias: "+ aux.getVariacion()+"%");
+			}
+			System.out.println(linea);
 		}
 	}
 	
@@ -51,6 +57,10 @@ public class Usuario {
 		
 	}
 	
+	
+	public void updateHistorico(String ruta) {
+		
+	}
 	
 	@Override
 	public int hashCode() {
